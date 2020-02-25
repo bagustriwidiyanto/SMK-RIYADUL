@@ -2,7 +2,7 @@
 $route = (!empty($_GET['url']))?$_GET['url']:"home";
 switch($route){
   case 'home':
-  // include('pages/bayar-lks.php');
+  include('pages/index.php');
   break;
   case 'bayar-lks':
   include('pages/bayar-lks.php');
@@ -33,6 +33,9 @@ switch($route){
   break;
   case 'tambah-manajemen-pembayaran':
   include('pages/tambah-manajemen-pembayaran.php');
+  break;
+  case 'ganti-password':
+  include('pages/ganti-password.php');
   break;
   default:
   include('pages/index.php');

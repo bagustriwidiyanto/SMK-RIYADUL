@@ -1,4 +1,7 @@
-<?php include('pages/koneksi.php') ?>
+<?php include ('pages/koneksi.php');
+session_start();
+if (!empty($_SESSION['username'])) {
+    ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,9 +39,9 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="index.php" class="nav-link">Home</a>
       </li>
-      <!-- <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li> -->
+      <li class="nav-item float-right d-none d-sm-inline-block">
+        <a href="index.php?logout" class="nav-link">Log Out</a>
+      </li>
     </ul>
     <!-- <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
@@ -118,3 +121,17 @@
 <script src="dist/js/demo.js"></script>
 </body>
 </html>
+<?php
+}else{
+  echo "<script>location.replace('login.php');
+  alert('Anda Harus Login Terlebih Dahulu !')</script>";
+}
+if(isset($_GET['logout'])){
+  session_destroy();
+  ?>
+  <script>
+  alert('Sukses Log Out !');
+  location.replace('login.php')</script>
+  <?php
+}
+?>

@@ -1,8 +1,8 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <a href="#" class="brand-link">
-    <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-         style="opacity: .8">
-    <span class="brand-text font-weight-light">SMK RIYADLUL QUR'AN</span>
+    <!-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+         style="opacity: .8"> -->
+    <span class="brand-text offset-1 font-weight-light">SMK RIYADLUL QUR'AN</span>
   </a>
   <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -10,7 +10,7 @@
         <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">Alexander Pierce</a>
+        <a href="#" class="d-block"><?php echo ucwords($_SESSION['username']); ?></a>
       </div>
     </div>
     <nav class="mt-2">
@@ -90,8 +90,8 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item has-treeview <?php echo $_GET['url']=='tampil-manajemen-pembayaran'||$_GET['url']=='tambah-manajemen-pembayaran'?'menu-open':'';?>">
-          <a href="#" class="nav-link <?php echo $_GET['url']=='tampil-manajemen-pembayaran'||$_GET['url']=='tambah-manajemen-pembayaran'?'active':'';?>">
+        <li class="nav-item has-treeview <?php echo $_GET['url']=='tampil-manajemen-pembayaran'||$_GET['url']=='tambah-manajemen-pembayaran'||$_GET['url']=='ganti-password'?'menu-open':'';?>">
+          <a href="#" class="nav-link <?php echo $_GET['url']=='tampil-manajemen-pembayaran'||$_GET['url']=='tambah-manajemen-pembayaran'||$_GET['url']=='ganti-password'?'active':'';?>">
             <i class="nav-icon fas fa-copy"></i>
             <p>
               Manajemen Data
@@ -108,11 +108,11 @@
             <li class="nav-item">
               <a href="index.php?url=tambah-manajemen-pembayaran" <?php echo $_GET['url']=='tambah-manajemen-pembayaran'?'class="nav-link active"':'class="nav-link"';?>>
                 <i class="far fa-circle nav-icon"></i>
-                <p>Tambah Tahun Pembayaran</p>
+                <p>Tambah Tahun Bayar</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="#" class='nav-link'>
+              <a href="index.php?url=ganti-password" <?php echo $_GET['url']=='ganti-password'?'class="nav-link active"':'class="nav-link"';?>>
                 <i class="far fa-circle nav-icon"></i>
                 <p>Ganti Password</p>
               </a>
@@ -209,6 +209,12 @@
             </li>
             <li class="nav-item">
               <a href="index.php?url=tambah-manajemen-pembayaran" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Tambah Tahun Bayar</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="index.php?url=ganti-password" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Ganti Password</p>
               </a>

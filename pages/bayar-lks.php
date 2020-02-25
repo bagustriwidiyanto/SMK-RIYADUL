@@ -12,7 +12,7 @@
         <div class="form-group">
           <form class="" action="" method="post">
           <label for="id">ID Pembayaran</label>
-          <input type="text" class='form-control' value='BYR<?php $query = mysqli_query($koneksi,'select id_bayar from tbl_bayar');
+          <input type="text" readonly class='form-control' id ='id' value='BYR<?php $query = mysqli_query($koneksi,'select id_bayar from tbl_bayar');
           $param2 = 000;
           if (mysqli_num_rows($query)!=0) {
               while ($data = mysqli_fetch_assoc($query)) {
@@ -52,6 +52,10 @@
           <input type="number" readonly name="sisa" class='form-control' id="sisa">
         </div>
         <div class="form-group">
+          <label for="inputProjectLeader">Komentar</label>
+          <input type="text" name="komentar" id='komentar' class='form-control' id="sisa">
+        </div>
+        <div class="form-group">
           <input type="submit" value="Submit" name='submit' class='form-control'>
         </div>
       </form>
@@ -60,11 +64,11 @@
   </div>
 </div>
 <?php
-$proses = mysqli_query($koneksi,'select * from bayar_lks order by id_bayar desc')or die(mysqli_error($koneksi));
+$proses = mysqli_query($koneksi,'select * from bayar_lks order by sisa_bayar')or die(mysqli_error($koneksi));
 $j=0;
 echo "<script>var cek = [";
 while($data = mysqli_fetch_assoc($proses)){
-  echo "['".$data['nis']."','".$data['sisa_bayar']."'],";
+  echo "['".$data['nis']."','".$data['sisa_bayar']."','".$data['id_bayar']."'],";
   $j++;
 }
 echo '];';
@@ -78,6 +82,15 @@ while($data = mysqli_fetch_assoc($proses)){
 }
 echo '];';
 
+$proses = mysqli_query($koneksi,'select * from tbl_bayar')or die(mysqli_error($koneksi));
+$j=0;
+echo "var byr = [";
+while($data = mysqli_fetch_assoc($proses)){
+  echo "['".$data['nis']."','".$data['ket']."','".$data['komentar']."'],";
+  $j++;
+}
+echo '];';
+
 $proses = mysqli_query($koneksi,'select * from parameter')or die(mysqli_error($koneksi));
 $i=0;
 echo "var data = [";
@@ -87,14 +100,26 @@ while($data = mysqli_fetch_assoc($proses)){
 }
 echo '];</script>';
 if(isset($_POST['submit'])){
+    $proses = mysqli_query($koneksi,"select * from tbl_bayar");
+    $param = 0;
     $id = $_POST['id'];
+      while ($data = mysqli_fetch_assoc($proses)){
+        if($data['id_bayar']==$id){
+          $param++;
+          break;
+        }
+      }
     $nama = $_POST['nama'];
     $total = $_POST['pembayaran'];
     $tanggal = $_POST['tanggal'];
     $terbayar = $_POST['terbayar'];
     $sisa = $_POST['sisa'];
+    $komentar = $_POST['komentar'];
     $query = mysqli_query($koneksi,'insert into bayar_lks values("'.$id.'","'.$nama.'","'.$total.'","'.$terbayar.'","'.$sisa.'")') or die(mysqli_error($koneksi));
-    $query1 = mysqli_query($koneksi,'insert into tbl_bayar values("'.$id.'","'.$tanggal.'","LKS")') or die(mysqli_error($koneksi));
+    $query1 = true;
+    if ($param == 0) {
+        $query1 = mysqli_query($koneksi, 'insert into tbl_bayar values("'.$id.'","'.$nama.'","'.$tanggal.'","LKS","'.$komentar.'")') or die(mysqli_error($koneksi));
+    }
     if($query && $query1){
         ?> <script>
         location.replace('index.php?url=bayar-lks');
@@ -112,6 +137,11 @@ function siswa(test){
   document.getElementById('sisa').value = 0;
   var param;
   console.log(sis.length);
+  for(var i=0;i<byr.length;i++){
+    if(byr[i][0] == test && byr[i][1]=='LKS'){
+      document.getElementById('komentar').value = byr[i][2];
+    }
+  }
   for(var i=0;i<sis.length;i++){
     if(test == sis[i][0]){
       param = sis[i][1];
@@ -132,6 +162,7 @@ function siswa(test){
       if(cek[i][0] == test){
         document.getElementById('total').value = cek[i][1];
         document.getElementById('sisa').value = cek[i][1];
+        document.getElementById('id').value = cek[i][2];
         break;
       }
       else{
