@@ -27,7 +27,7 @@ if (!empty($_SESSION['username'])) {
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
-  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet"> -->
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -43,16 +43,6 @@ if (!empty($_SESSION['username'])) {
         <a href="index.php?logout" class="nav-link">Log Out</a>
       </li>
     </ul>
-    <!-- <form class="form-inline ml-3">
-      <div class="input-group input-group-sm">
-        <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-        <div class="input-group-append">
-          <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-          </button>
-        </div>
-      </div>
-    </form> -->
   </nav>
 <?php include('layout/sidebar.php') ?>
   <!-- Content Wrapper. Contains page content -->

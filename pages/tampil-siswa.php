@@ -4,11 +4,74 @@
       <div class="card-header">
         <h3 class="card-title">Tabel Data Siswa</h3>
         <div class="card-tools">
-          <div class="input-group input-group-sm" style="width: 150px;">
-            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+          <div class="input-group input-group-sm">
+            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#modal-import">
+              Import
+            </button>
+            &nbsp
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-default">
+              Export
+            </button>
+            &nbsp
+            <input style='height:40px;' type="text" name="table_search" class="form-control float-right" placeholder="Search">
             <div class="input-group-append">
               <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
             </div>
+          </div>
+          <div class="modal fade" id="modal-import">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Import</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group">
+                    <label for="exampleInputFile">File input</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <input type="submit" class="btn btn-primary" value='Import'>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal fade" id="modal-default">
+            <form action="#" method="post">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Export</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                      <label for="mulai">Mulai</label>
+                      <input type="date" class='form-control' name="mulai" id="">
+                    </div>
+                    <div class="form-group">
+                      <label for="sampai">Sampai</label>
+                      <input type="date" class='form-control' name="sampai" id="">
+                    </div>
+                  </div>
+                  <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value='Export'>
+                  </div>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
